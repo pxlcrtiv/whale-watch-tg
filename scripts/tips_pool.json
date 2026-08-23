@@ -1,0 +1,127 @@
+[
+  {
+    "title": "Exchange inflow ≈ sell pressure — but it's a heuristic, not a fact",
+    "body": "The core whale-watch signal: ERC-20 transfers INTO an exchange hot wallet usually precede sell orders, and outflows usually mean accumulation. It is a strong prior, not a guarantee — exchanges also rebalance internally (hot→cold), and OTC desks settle off-chain. Always read the size, the target (hot vs cold wallet), and the entity before acting.",
+    "command": "whale-watch demo"
+  },
+  {
+    "title": "The Transfer event is the whole game",
+    "body": "Every ERC-20 movement emits `Transfer(from, to, value)` with topic0 = keccak256(\"Transfer(address,address,uint256)\") = 0xddf252ad…b3ef. A whale scanner is mostly a filter over eth_getLogs for that signature — sender in topics[1], receiver in topics[2], amount in data. Know those three fields and you can track any token without indexing every block yourself.",
+    "command": "curl -s -X POST https://ethereum-rpc.publicnode.com -H 'Content-Type: application/json' --data '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"eth_getLogs\",\"params\":[{\"fromBlock\":\"0x1312d00\",\"toBlock\":\"0x1312d00\",\"address\":\"0xdac17f958d2ee523a2206206994597c13d831ec7\",\"topics\":[\"0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef\"]}]}'"
+  },
+  {
+    "title": "Decimals: 10^18 is not 1 token",
+    "body": "Raw ERC-20 amounts are integers in the token's smallest unit. USDT uses 6 decimals, most ERC-20s use 18, WBTC uses 8. A log with value=0x1027E72F1F1281300 (≈300,000,000,000,000,000,000) is 300 *USDT* if you divide by 10^6 — but 300 ETH if you divide by 10^18. whale-watch stores decimals per token precisely because this mistake produces phantom 'whales'.",
+    "command": "whale-watch status"
+  },
+  {
+    "title": "Hot wallets vs cold wallets tell different stories",
+    "body": "Exchange hot wallets (small balances, high churn) hold customer funds for withdrawal flow; cold wallets are the exchange's own treasury. An inflow to the *hot* wallet is often ordinary deposits; an inflow to the *cold*/treasury wallet is a real position change. Two Binance addresses can mean opposite things — tag them both, weight them differently.",
+    "command": "whale-watch watch --subscribe 0x28c6c06298d514db089934071355e5743bf21d60"
+  },
+  {
+    "title": "USDT mints/burns are a liquidity early-warning",
+    "body": "Tether Treasury (0x5754284f…b949) mints USDT when demand for stablecoin liquidity rises and burns when it falls. A cluster of large mints often precedes risk-on buying (fiat ramp into crypto); near-term burn spikes appear before de-risking. It's one of the few on-chain signals that leads price rather than lags it.",
+    "command": "whale-watch watch --subscribe 0x5754284f345afc66a98fbb0a0afe71e0f007b949"
+  },
+  {
+    "title": "Same-entity transfers are the #1 false positive",
+    "body": "An exchange moving 40,000 ETH from its hot wallet to its own cold wallet looks exactly like a whale withdrawal on a naive scanner. Rule: if sender and receiver share the same tagged entity, classify as internal rebalancing — usually noise. whale-watch marks these 'internal' instead of 'sell pressure'.",
+    "command": "whale-watch demo"
+  },
+  {
+    "title": "HODL waves: the age of unspent coins is a whale tell",
+    "body": "Coins that haven't moved in 3+ years are 'old whales' or lost coins. When a pre-2021 address suddenly transfers 50,000 ETH, exchanges hold the proceeds within hours and the market frequently knocks. Age-of-coins (HODL waves) is free on public datasets and filters out the 95% of churn that's just CEX internals.",
+    "command": "whale-watch watch --interval 30"
+  },
+  {
+    "title": "MVRV and SOPR put whale moves in context",
+    "body": "A whale deposit into Binance at MVRV > 3.5 (holders in deep profit) is more bearish than the same deposit at MVRV 1.1. SOPR > 1 means the seller realizes profit. On-chain scanners answer 'what moved'; MVRV/SOPR answer 'what it means' — combine both before concluding anything about price.",
+    "command": "whale-watch demo"
+  },
+  {
+    "title": "Funding rates tell you who's leverage-long the same move",
+    "body": "Perpetual funding > 0.05%/8h with a whale dumping into the spot market = longs paying to stay long while spot supply grows. That combination historically precedes cascades. Whale alerts are most actionable when the derivative side agrees with the spot signal — watch both, act on the agreement.",
+    "command": "whale-watch watch --send-telegram"
+  },
+  {
+    "title": "ERC-20 events are NOT confirmed transactions",
+    "body": "eth_getLogs returns events from *proposed* blocks. Reorgs (including 51% and even simple node divergence days) can drop or reorder them. Cursor-safe scanners must store (tx_hash, log_index) and tolerate reprocessing — an event that disappears after a reorg should never be re-alerted. whale-watch dedupes on that exact key.",
+    "command": "whale-watch status"
+  },
+  {
+    "title": "Public RPCs cap eth_getLogs ranges — batch or die",
+    "body": "Free public endpoints (publicnode, llamarpc, Ankr) usually reject log queries spanning more than a few thousand blocks. A production scanner batches cursor→cursor+N blocks, retries on rejection, and persists the cursor after every batch — never all-or-nothing. That's the whole cursor-safe design in one sentence.",
+    "command": "whale-watch watch --batch 2000"
+  },
+  {
+    "title": "A whale is a size class, not an identity",
+    "body": "Common working definitions: ≥1,000 ETH, ≥1% of a token's supply, or USD flows ≥ $1M in a single tx. For stablecoins, $10M+ is a 'mega move'. Pick thresholds per token: 1,000,000 PEPE is dust; 1,000 ETH is a whale. whale-watch's rate classes (WATCH/LARGE/MEGA) are exactly this idea done in code.",
+    "command": "whale-watch demo"
+  },
+  {
+    "title": "MEV and private relays hide whale trades from the mempool",
+    "body": "Since 0xAA and flashbots, many large orders never appear in the public mempool — they're bundled and sent straight to validators. If you only watch the mempool you'll miss the biggest trades. On-chain (finalized) tracking catches them all, just a few seconds later. Latency trade-off, not a blind spot.",
+    "command": "whale-watch watch"
+  },
+  {
+    "title": "Stablecoin exchange flows lead BTC direction",
+    "body": "A recurring empirical pattern: stablecoin inflows (USDT/USDC to exchanges) rise before BTC buying pressure; outflow spikes precede selling. The theory: stablecoins are the 'dry powder' that converts into BTC/ETH. Track exchange stablecoin balances as a leading indicator alongside whale moves.",
+    "command": "whale-watch watch --subscribe 0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
+  },
+  {
+    "title": "Follow the validator deposit address",
+    "body": "0x00000000219ab540356cbb839cbe05303d7705fa is the ETH2 staking deposit contract. A 32-ETH round-trip is routine; a 100,000+ ETH deposit in one block is institutional conviction. Deposit spikes correlate with long-term supply lock-up — a slow-motion whale signal that never hits an exchange.",
+    "command": "whale-watch watch --subscribe 0x00000000219ab540356cbb839cbe05303d7705fa"
+  },
+  {
+    "title": "Don't chase every 8-figure transfer: alert fatigue is real",
+    "body": "MEGA stablecoin moves (ten-figure USDT shuffles between exchanges) happen daily and move nothing. The edge is in *classified* signals — size × direction × tagged entities × context. An alerting system without entity tagging and rate-class filtering trains you to ignore every alert. Better five good alerts than fifty noisy ones.",
+    "command": "whale-watch demo"
+  },
+  {
+    "title": "Your cursor is a database row, not a magic number",
+    "body": "Cursor safety means: read last_block from storage, scan cursor+1..cursor+N, persist after each batch. If you crash mid-scan, the next run resumes exactly where you left off; reprocessing an old range is harmless because events dedupe on (tx_hash, log_index). Never derive the cursor from 'now' at startup — you'll skip blocks during downtime.",
+    "command": "whale-watch status"
+  },
+  {
+    "title": "Cold wallet outflows are accumulation — until they're not",
+    "body": "Large OTC settlements are often settled from cold wallets to an under-the-radar address, then re-deposited to an exchange days later. The first leg reads as bullish accumulation; the second leg as sell pressure. Tag the OTC desk addresses in your known-address list to link the two legs — that's how the pros read tape.",
+    "command": "whale-watch watch"
+  },
+  {
+    "title": "Dust attacks and address contamination",
+    "body": "Attackers airdrop tiny amounts (dust) to many wallets to cluster them (privacy deanonymization). If you subscribe to every address that 'sent you dust', you'll build a map of clusters — and scanners that alert on dust-level transfers teach you nothing. Filter by minimum USD value; whale-watch's WATCH class starts at $100K per transfer.",
+    "command": "whale-watch demo"
+  },
+  {
+    "title": "Exchange reserve data is a public good",
+    "body": "Public proof-of-reserve trackers (alternative.me, CryptoQuant, Glassnode free tier) show aggregate CEX balances. Combined with your own whale alerts: falling exchange ETH reserves + repeated whale *outflows* = supply being locked away — historically a bullish structural shift. Reserves are lagging; your alerts are leading.",
+    "command": "whale-watch status"
+  },
+  {
+    "title": "Timestamp discipline: block time ≠ execution time",
+    "body": "A transfer's block timestamp is when the block was minted, not when the tx was submitted. Whale scanners showing 'actionable NOW' are really showing 'actionable ~12s ago at best'. For speed, pair on-chain alerts with mempool sniffing; for truth, always cite block height, not clock time, in alert metadata.",
+    "command": "whale-watch demo"
+  },
+  {
+    "title": "Chain splits: what works on Ethereum generalizes",
+    "body": "The Transfer-event scanner is chain-agnostic — same topic0 on polygon, arbitrum, base, optimism. What changes: token addresses, RPC endpoints, and the exchange wallet map. A multi-chain whale watcher is one tokens.json and one known_addresses.json away. Start single-chain, keep the data files the extension point.",
+    "command": "whale-watch watch"
+  },
+  {
+    "title": "Backtest your alert thresholds before you trust them",
+    "body": "The honest way to tune a whale alert: replay historical Transfer logs through your exact pipeline (enrichment → filter → narrative) over 90 days, count alerts that preceded notable price moves vs noise. If your 'mega move' threshold fires 200 times a week, it's not a signal, it's a screensaver. whale-watch fixtures make this replay testable offline.",
+    "command": "whale-watch demo"
+  },
+  {
+    "title": "Privacy rails change the meaning of 'exchange'",
+    "body": "Deposits via Tornado Cash, Railgun, or relayer contracts rarely hit the exchange hot wallet directly — they arrive from a pool or a private relayer address first. A scanner that tags only raw addresses will classify a big private deposit as 'wallet-to-wallet'. Keep a denylist/known-relayer list updated, or accept the blind spot consciously.",
+    "command": "whale-watch watch"
+  },
+  {
+    "title": "Ships weekly, not hourly: cadence beats noise",
+    "body": "Day-trading whale alerts is a zero-sum race against MEV bots and OTC desks. The durable edge is *weekly synthesis*: net exchange flows per token, top-10 flows, accumulation clusters — delivered as a single readable digest. The alert is for awareness; the digest is for decision. Both, in that order.",
+    "command": "whale-watch demo"
+  }
+]

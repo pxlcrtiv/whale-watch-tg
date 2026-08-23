@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>whale-watch-tg — alert preview</title>
+<style>
+:root { color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin: 0; padding: 32px 16px 64px; background: #0e1621; color: #e8e8e8;
+       font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+.wrap { max-width: 720px; margin: 0 auto; }
+header { text-align: center; margin-bottom: 28px; }
+h1 { font-size: 26px; margin: 0 0 6px; }
+.sub { color: #8ea2b8; font-size: 14px; }
+.banner { background: #1c2b3a; border: 1px solid #2f4a5e; border-radius: 10px;
+          padding: 10px 14px; font-size: 13px; color: #a8c7de; margin-bottom: 24px; }
+.card { background: #17212b; border: 1px solid #253343; border-radius: 12px;
+        padding: 16px 18px; margin-bottom: 16px; }
+.card .head { display: flex; justify-content: space-between; align-items: baseline; }
+.card .head .token { font-weight: 700; font-size: 15px; }
+.badge { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 999px; }
+.badge.mega { background: #7a3b00; color: #ffd9a8; }
+.badge.large { background: #3b4a7a; color: #c9d4ff; }
+.badge.watch { background: #2a3a33; color: #b8e6c9; }
+.flow { font-size: 19px; font-weight: 600; margin: 12px 0 6px; }
+.flow .arrow { color: #6ab0f3; padding: 0 6px; }
+.narrative { color: #c8d3de; font-size: 14px; margin: 0 0 12px; }
+.meta { font-size: 12.5px; color: #8ea2b8; line-height: 1.7; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.meta b { color: #b9c9d6; font-weight: 600; }
+.tag-exchange { color: #ffb454; }
+.ts { font-size: 12px; color: #6c849b; margin-top: 8px; text-align: right; }
+footer { text-align: center; color: #5f768c; font-size: 12px; margin-top: 28px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🐋 whale-watch-tg — alert preview</h1>
+    <div class="sub">Exactly what a Telegram subscriber receives · 2026-08-23 22:57:38 UTC</div>
+  </header>
+  <div class="banner">⚠️ Demo page rendered from bundled <b>fixture transfers</b> — no real
+  transactions, no network access, no API keys. Live alerts look the same.</div>
+  <div class="card">
+  <div class="head">
+    <span class="token">🐋 ETH</span>
+    <span class="badge large">LARGE</span>
+  </div>
+  <div class="flow">3,000 ETH <span class="arrow">→</span> Binance</div>
+  <p class="narrative">Likely sell pressure: large inflow to a centralized exchange.</p>
+  <div class="meta">
+    <b>From</b> 0x8a355f52…d0d1b4f2 (untagged)<br>
+    <b>To</b> 0x28c6c062…3bf21d60 (Binance · exchange)<br>
+    <b>USD</b> ≈ $7.20M<br>
+    <b>Tx</b> 0x00000000…00000001 · block 19,999,991 · ethereum
+  </div>
+  <div class="ts">2025-08-12 12:00:00 UTC · demo fixture</div>
+</div>
+<div class="card">
+  <div class="head">
+    <span class="token">🐋 USDT</span>
+    <span class="badge mega">MEGA MOVE</span>
+  </div>
+  <div class="flow">45,200,000 USDT <span class="arrow">→</span> Coinbase</div>
+  <p class="narrative">Likely sell pressure: large inflow to a centralized exchange.</p>
+  <div class="meta">
+    <b>From</b> 0xb67a90f0…3f5d9e2a (untagged)<br>
+    <b>To</b> 0x71660c40…6fe775d3 (Coinbase · exchange)<br>
+    <b>USD</b> ≈ $45.20M<br>
+    <b>Tx</b> 0x00000000…00000002 · block 19,999,992 · ethereum
+  </div>
+  <div class="ts">2025-08-12 12:00:07 UTC · demo fixture</div>
+</div>
+<div class="card">
+  <div class="head">
+    <span class="token">🐋 WBTC</span>
+    <span class="badge mega">MEGA MOVE</span>
+  </div>
+  <div class="flow">420 WBTC <span class="arrow">→</span> an unknown address</div>
+  <p class="narrative">Likely accumulation: large outflow from a centralized exchange.</p>
+  <div class="meta">
+    <b>From</b> 0x71660c40…6fe775d3 (Coinbase · exchange)<br>
+    <b>To</b> 0xc4d7a9f0…a0e7b5c3 (untagged)<br>
+    <b>USD</b> ≈ $27.60M<br>
+    <b>Tx</b> 0x00000000…00000003 · block 19,999,993 · ethereum
+  </div>
+  <div class="ts">2025-08-12 12:00:14 UTC · demo fixture</div>
+</div>
+<div class="card">
+  <div class="head">
+    <span class="token">🐋 PEPE</span>
+    <span class="badge mega">MEGA MOVE</span>
+  </div>
+  <div class="flow">1,250,000,000,000 PEPE <span class="arrow">→</span> an unknown address</div>
+  <p class="narrative">Likely accumulation: large outflow from a centralized exchange.</p>
+  <div class="meta">
+    <b>From</b> 0x0d070796…40b492fe (Gate.io · exchange)<br>
+    <b>To</b> 0xe2a1b8c4…d8f9a0b1 (untagged)<br>
+    <b>USD</b> ≈ $15.00M<br>
+    <b>Tx</b> 0x00000000…00000004 · block 19,999,994 · ethereum
+  </div>
+  <div class="ts">2025-08-12 12:00:21 UTC · demo fixture</div>
+</div>
+<div class="card">
+  <div class="head">
+    <span class="token">🐋 USDC</span>
+    <span class="badge large">LARGE</span>
+  </div>
+  <div class="flow">8,000,000 USDC <span class="arrow">→</span> OKX</div>
+  <p class="narrative">Likely sell pressure: large inflow to a centralized exchange.</p>
+  <div class="meta">
+    <b>From</b> 0xd9f8c3b4…d7e8f9a0 (untagged)<br>
+    <b>To</b> 0x6cc5f688…a59fda7b (OKX · exchange)<br>
+    <b>USD</b> ≈ $8.00M<br>
+    <b>Tx</b> 0x00000000…00000005 · block 19,999,995 · ethereum
+  </div>
+  <div class="ts">2025-08-12 12:00:28 UTC · demo fixture</div>
+</div>
+<div class="card">
+  <div class="head">
+    <span class="token">🐋 ETH</span>
+    <span class="badge large">LARGE</span>
+  </div>
+  <div class="flow">950 ETH <span class="arrow">→</span> an unknown address</div>
+  <p class="narrative">Likely accumulation: large outflow from a centralized exchange.</p>
+  <div class="meta">
+    <b>From</b> 0x2910543a…800a63d2 (Kraken · exchange)<br>
+    <b>To</b> 0xf3b2a7c1…d7e8f9a0 (untagged)<br>
+    <b>USD</b> ≈ $2.28M<br>
+    <b>Tx</b> 0x00000000…00000006 · block 19,999,996 · ethereum
+  </div>
+  <div class="ts">2025-08-12 12:00:35 UTC · demo fixture</div>
+</div>
+<div class="card">
+  <div class="head">
+    <span class="token">🐋 SHIB</span>
+    <span class="badge watch">WATCH</span>
+  </div>
+  <div class="flow">5,000,000,000,000 SHIB <span class="arrow">→</span> an unknown address</div>
+  <p class="narrative">Wallet-to-wallet transfer (neither address is a tagged exchange).</p>
+  <div class="meta">
+    <b>From</b> 0xa4b8c2d6…e4f6a8b0 (untagged)<br>
+    <b>To</b> 0xb1c3d5e7…f0a2b4c6 (untagged)<br>
+    <b>USD</b> ≈ $65.0K<br>
+    <b>Tx</b> 0x00000000…00000007 · block 19,999,997 · ethereum
+  </div>
+  <div class="ts">2025-08-12 12:00:42 UTC · demo fixture</div>
+</div>
+<div class="card">
+  <div class="head">
+    <span class="token">🐋 LINK</span>
+    <span class="badge mega">MEGA MOVE</span>
+  </div>
+  <div class="flow">2,100,000 LINK <span class="arrow">→</span> Binance</div>
+  <p class="narrative">Likely sell pressure: large inflow to a centralized exchange.</p>
+  <div class="meta">
+    <b>From</b> 0x9c7e5a3b…6d4f2e0c (untagged)<br>
+    <b>To</b> 0xdfd5293d…1343963d (Binance · exchange)<br>
+    <b>USD</b> ≈ $25.20M<br>
+    <b>Tx</b> 0x00000000…00000008 · block 19,999,998 · ethereum
+  </div>
+  <div class="ts">2025-08-12 12:00:49 UTC · demo fixture</div>
+</div>
+  <footer>whale-watch-tg · MIT · informational only, not trading advice</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+name: daily-green
+
+# Daily Green — cloud fallback for the local launchd scheduler.
+# At 12:00 UTC every day this runs the same daily_update.py the Mac runs
+# locally (12:07 + 18:07 local). Whichever runs first wins the day; the other
+# sees the entry already exists and exits cleanly (idempotent). If the Mac
+# was off, this job backfills every missed day — one dated, non-empty commit
+# per day — so the contribution graph stays green.
+#
+# NOTE on account state: if jobs never start (zero steps, no logs), check
+# github.com/settings/actions — this account currently has a billing lock
+# that prevents runners from starting at all. The workflow file itself is
+# valid; local launchd keeps the graph green in the meantime.
+#
+# Customize:      edit scripts/tips_pool.json (content pool)
+# Pause:          remove the schedule block below, or add .daily-pause
+# Manual run:     Actions tab -> "daily-green" -> "Run workflow"
+
+on:
+  schedule:
+    - cron: "0 12 * * *" # 12:00 UTC = 09:00 ART/BRT, 13:00 WAT
+  workflow_dispatch: {} # manual "Run workflow" button
+
+permissions:
+  contents: write # push the daily log commit
+
+concurrency:
+  group: daily-green
+  cancel-in-progress: false
+
+jobs:
+  daily:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Generate and push today's entry
+        env:
+          DAILY_GREEN_CI: "1"
+        run: python scripts/daily_update.py
