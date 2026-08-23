@@ -1,0 +1,57 @@
+name: CI
+
+# NOTE on account state: if jobs never start (zero steps, no logs), check
+# github.com/settings/actions — this account currently has a billing lock
+# that prevents runners from starting at all. The workflow is valid and is
+# verified locally before shipping (see README, "Testing"); local runs keep
+# the pipeline honest in the meantime.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Unit + integration tests (offline)
+        run: python -m pytest tests/ -q
+
+      - name: Demo smoke — keyless, offline, writes preview page
+        run: |
+          whale-watch demo --out /tmp/whale-alert-preview.html
+          test -s /tmp/whale-alert-preview.html
+          grep -q "Binance" /tmp/whale-alert-preview.html
+
+      - name: Daily-green script sanity (sim date, no push)
+        run: |
+          DAILY_GREEN_SIM_DATE=2030-01-15 DAILY_GREEN_NO_PUSH=1 python scripts/daily_update.py
+          test -s docs/daily-tips.md
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: ruff lint
+        run: |
+          pip install ruff
+          ruff check whale_watch tests scripts --output-format=github
