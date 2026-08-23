@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Tooling
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+
+# Local state
+.venv/
+whale-watch.sqlite3
+whale-watch.sqlite3-*
+
+# Daily Green pause marker (per-repo opt-out)
+.daily-pause
+
+# Editor/OS
+.DS_Store
+.idea/
+.vscode/

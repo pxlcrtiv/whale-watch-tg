@@ -1,0 +1,112 @@
+{
+  "_note": "Synthetic demo transfers: tx hashes are obviously fake (0x0000…N), amounts are illustrative, and exchange addresses come from the bundled known-address list — so the demo exercises the REAL enrichment/summarization pipeline with zero keys and zero network. Not real transactions.",
+  "chain": "ethereum",
+  "network": "fixture",
+  "interval_seconds": 7,
+  "transfers": [
+    {
+      "tx_hash": "0x0000000000000000000000000000000000000000000000000000000000000001",
+      "log_index": 12,
+      "block": 19999991,
+      "ts": 1755000000,
+      "token": "ETH",
+      "token_address": "0x0000000000000000000000000000000000000000",
+      "from": "0x8a355f524215e5fb13e5e35d1c5f63f2d0d1b4f2",
+      "to": "0x28c6c06298d514db089934071355e5743bf21d60",
+      "amount": "3000",
+      "value_usd": "7200000",
+      "note": "Prime demo: 3,000 ETH to Binance — likely sell pressure"
+    },
+    {
+      "tx_hash": "0x0000000000000000000000000000000000000000000000000000000000000002",
+      "log_index": 3,
+      "block": 19999992,
+      "ts": 1755000007,
+      "token": "USDT",
+      "token_address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+      "from": "0xb67a90f0c53f2f3a2f1c9f7d6a4a1c8b3f5d9e2a",
+      "to": "0x71660c4005ba85c37ccec55d0c4493e66fe775d3",
+      "amount": "45200000",
+      "value_usd": "45200000",
+      "note": "45.2M USDT to Coinbase — MEGA inflow"
+    },
+    {
+      "tx_hash": "0x0000000000000000000000000000000000000000000000000000000000000003",
+      "log_index": 7,
+      "block": 19999993,
+      "ts": 1755000014,
+      "token": "WBTC",
+      "token_address": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+      "from": "0x71660c4005ba85c37ccec55d0c4493e66fe775d3",
+      "to": "0xc4d7a9f0b2e6a1c8d5f3a9e4b6c2d8f1a0e7b5c3",
+      "amount": "420",
+      "value_usd": "27600000",
+      "note": "420 WBTC out of Coinbase — accumulation by a whale"
+    },
+    {
+      "tx_hash": "0x0000000000000000000000000000000000000000000000000000000000000004",
+      "log_index": 1,
+      "block": 19999994,
+      "ts": 1755000021,
+      "token": "PEPE",
+      "token_address": "0x6982508145454ce325ddbe47a25d4ec3d2311933",
+      "from": "0x0d0707963952f2fba59dd06f2b425ace40b492fe",
+      "to": "0xe2a1b8c4d5f6a3e9b7c2d1f0a4e5b6c7d8f9a0b1",
+      "amount": "1250000000000",
+      "value_usd": "15000000",
+      "note": "1.25T PEPE from Gate.io — whale accumulation"
+    },
+    {
+      "tx_hash": "0x0000000000000000000000000000000000000000000000000000000000000005",
+      "log_index": 9,
+      "block": 19999995,
+      "ts": 1755000028,
+      "token": "USDC",
+      "token_address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "from": "0xd9f8c3b4a5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0",
+      "to": "0x6cc5f688a315f3dc28a7781717a9a798a59fda7b",
+      "amount": "8000000",
+      "value_usd": "8000000",
+      "note": "8M USDC to OKX"
+    },
+    {
+      "tx_hash": "0x0000000000000000000000000000000000000000000000000000000000000006",
+      "log_index": 5,
+      "block": 19999996,
+      "ts": 1755000035,
+      "token": "ETH",
+      "token_address": "0x0000000000000000000000000000000000000000",
+      "from": "0x2910543af39aba0cd09dbb2d50200b3e800a63d2",
+      "to": "0xf3b2a7c1d4e5f6a8b9c0d1e2f3a4b5c6d7e8f9a0",
+      "amount": "950",
+      "value_usd": "2280000",
+      "note": "950 ETH from Kraken — accumulation"
+    },
+    {
+      "tx_hash": "0x0000000000000000000000000000000000000000000000000000000000000007",
+      "log_index": 2,
+      "block": 19999997,
+      "ts": 1755000042,
+      "token": "SHIB",
+      "token_address": "0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce",
+      "from": "0xa4b8c2d6e1f3a5c7b9d0e2f4a6b8c0d2e4f6a8b0",
+      "to": "0xb1c3d5e7f9a0b2c4d6e8f0a1b3c5d7e9f0a2b4c6",
+      "amount": "5000000000000",
+      "value_usd": "65000",
+      "note": "5T SHIB between two untagged wallets — plain transfer"
+    },
+    {
+      "tx_hash": "0x0000000000000000000000000000000000000000000000000000000000000008",
+      "log_index": 4,
+      "block": 19999998,
+      "ts": 1755000049,
+      "token": "LINK",
+      "token_address": "0x514910771af9ca656af840dff83e8264ecf986ca",
+      "from": "0x9c7e5a3b1d8f6c2e4a0b9d7f5e3c1a8b6d4f2e0c",
+      "to": "0xdfd5293d8e347dfe59e90efd55b2956a1343963d",
+      "amount": "2100000",
+      "value_usd": "25200000",
+      "note": "2.1M LINK to Binance cold wallet"
+    }
+  ]
+}

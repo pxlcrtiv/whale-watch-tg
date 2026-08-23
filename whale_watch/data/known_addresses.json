@@ -1,0 +1,28 @@
+{
+  "_note": "Community-maintained best-effort public labels (Etherscan/blockchain explorers). Exchange wallets rotate over time — tags are hints, not facts. Keys are lowercase addresses.",
+  "addresses": [
+    {"address": "0x28c6c06298d514db089934071355e5743bf21d60", "name": "Binance", "kind": "exchange"},
+    {"address": "0xdfd5293d8e347dfe59e90efd55b2956a1343963d", "name": "Binance", "kind": "exchange"},
+    {"address": "0x56eddb7aa87536c09ccc2793473599fd21a8b17f", "name": "Binance", "kind": "exchange"},
+    {"address": "0x9696f59e4d72e237be84ffd425dcad154bf96976", "name": "Binance", "kind": "exchange"},
+    {"address": "0x71660c4005ba85c37ccec55d0c4493e66fe775d3", "name": "Coinbase", "kind": "exchange"},
+    {"address": "0x503828976d22510aad0201ac7ec88293211d23da", "name": "Coinbase", "kind": "exchange"},
+    {"address": "0x2910543af39aba0cd09dbb2d50200b3e800a63d2", "name": "Kraken", "kind": "exchange"},
+    {"address": "0xa83b11093c858c86321fbc4c1fe6578257199884", "name": "Kraken", "kind": "exchange"},
+    {"address": "0x6cc5f688a315f3dc28a7781717a9a798a59fda7b", "name": "OKX", "kind": "exchange"},
+    {"address": "0x98ec059dc3adfbdd63429454aeb0c990fba4a128", "name": "OKX", "kind": "exchange"},
+    {"address": "0xf89d7b9c864f589bbf53a82105107622b35eaa40", "name": "Bybit", "kind": "exchange"},
+    {"address": "0x876eabf441b2ee5b5b0554fd502a8e0600950cfa", "name": "Bitfinex", "kind": "exchange"},
+    {"address": "0xd24400ae8bfebb18ca49be86258a3c749cf46853", "name": "Gemini", "kind": "exchange"},
+    {"address": "0x2b5634c42055806a59e9107ed44d43c426e58258", "name": "KuCoin", "kind": "exchange"},
+    {"address": "0x6262998ced04146fa42253a5c0af90ca02dfd2a3", "name": "Crypto.com", "kind": "exchange"},
+    {"address": "0x0d0707963952f2fba59dd06f2b425ace40b492fe", "name": "Gate.io", "kind": "exchange"},
+    {"address": "0xab5c66752a9e8167967765f145937bcfd5f1d0c7", "name": "HTX", "kind": "exchange"},
+    {"address": "0x0639556f03714a74a5feeaf5736a4a64ff3d9a62", "name": "Bitget", "kind": "exchange"},
+    {"address": "0x7a250d5630b4cf539739df2c5dacb4c659f2488d", "name": "Uniswap V2 Router", "kind": "dex"},
+    {"address": "0xe592427a0aece92de3edee1f18e0157c05861564", "name": "Uniswap V3 Router", "kind": "dex"},
+    {"address": "0x5754284f345afc66a98fbb0a0afe71e0f007b949", "name": "Tether Treasury", "kind": "treasury"},
+    {"address": "0x00000000219ab540356cbb839cbe05303d7705fa", "name": "ETH2 Deposit", "kind": "staking"},
+    {"address": "0xdead000000000000000042069420694206942069", "name": "0xdead (burn)", "kind": "burn"}
+  ]
+}

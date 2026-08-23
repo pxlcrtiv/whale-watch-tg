@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "whale-watch-tg"
+version = "0.1.0"
+description = "Telegram whale tracker: subscribe to any wallet, get instant alerts with LLM summaries ('3,000 ETH to Binance — likely sell pressure'). Zero-key demo from bundled fixtures."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "pxlcrtiv" }]
+keywords = ["ethereum", "telegram", "whale", "alerts", "llm", "web3", "blockchain", "python", "bot", "crypto", "defi", "onchain"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Communications :: Chat",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Topic :: Office/Business :: Financial",
+]
+
+dependencies = [
+    "python-telegram-bot>=20.0,<23",
+    "web3>=6.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.5"]
+
+[project.scripts]
+whale-watch = "whale_watch.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["whale_watch*"]
+
+[tool.setuptools.package-data]
+whale_watch = ["data/*.json", "data/fixtures/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+markers = [
+    "network: hits the network (RPC / Telegram) - usually skipped",
+]
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+extend-exclude = ["docs", "examples"]
+
+[tool.ruff.lint]
+# Intentional deviations (with rationale):
+#   BLE001 - blind excepts isolate one alert/tx from killing the scan loop.
+#   S110   - try/except/pass is the LLM->template degradation path (by design).
+#   DTZ005/DTZ011 - daily_update.py timestamps are deliberately local (launchd
+#             runs in the user's local zone; the log mirrors it verbatim).
+#   EXE001 - daily_update.py ships with a shebang but stays non-executable;
+#             CI invokes it via `python scripts/daily_update.py`.
+#   S311   - the per-user command cooldown uses monotonic(), not a CSPRNG.
+ignore = ["BLE001", "S110", "DTZ005", "DTZ011", "EXE001", "S311"]
