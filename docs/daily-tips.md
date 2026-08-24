@@ -12,3 +12,10 @@ A recurring empirical pattern: stablecoin inflows (USDT/USDC to exchanges) rise 
 
 > `whale-watch watch --subscribe 0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48`
 
+
+## 2026-08-24 — Whale tip of the day: Follow the validator deposit address
+
+0x00000000219ab540356cbb839cbe05303d7705fa is the ETH2 staking deposit contract. A 32-ETH round-trip is routine; a 100,000+ ETH deposit in one block is institutional conviction. Deposit spikes correlate with long-term supply lock-up — a slow-motion whale signal that never hits an exchange.
+
+> `whale-watch watch --subscribe 0x00000000219ab540356cbb839cbe05303d7705fa`
+
