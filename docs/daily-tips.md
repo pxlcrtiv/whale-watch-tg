@@ -26,3 +26,10 @@ MEGA stablecoin moves (ten-figure USDT shuffles between exchanges) happen daily 
 
 > `whale-watch demo`
 
+
+## 2026-08-26 — Whale tip of the day: Your cursor is a database row, not a magic number
+
+Cursor safety means: read last_block from storage, scan cursor+1..cursor+N, persist after each batch. If you crash mid-scan, the next run resumes exactly where you left off; reprocessing an old range is harmless because events dedupe on (tx_hash, log_index). Never derive the cursor from 'now' at startup — you'll skip blocks during downtime.
+
+> `whale-watch status`
+
