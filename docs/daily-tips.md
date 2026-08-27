@@ -33,3 +33,10 @@ Cursor safety means: read last_block from storage, scan cursor+1..cursor+N, pers
 
 > `whale-watch status`
 
+
+## 2026-08-27 — Whale tip of the day: Cold wallet outflows are accumulation — until they're not
+
+Large OTC settlements are often settled from cold wallets to an under-the-radar address, then re-deposited to an exchange days later. The first leg reads as bullish accumulation; the second leg as sell pressure. Tag the OTC desk addresses in your known-address list to link the two legs — that's how the pros read tape.
+
+> `whale-watch watch`
+
