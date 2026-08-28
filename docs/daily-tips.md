@@ -40,3 +40,10 @@ Large OTC settlements are often settled from cold wallets to an under-the-radar 
 
 > `whale-watch watch`
 
+
+## 2026-08-28 — Whale tip of the day: Dust attacks and address contamination
+
+Attackers airdrop tiny amounts (dust) to many wallets to cluster them (privacy deanonymization). If you subscribe to every address that 'sent you dust', you'll build a map of clusters — and scanners that alert on dust-level transfers teach you nothing. Filter by minimum USD value; whale-watch's WATCH class starts at $100K per transfer.
+
+> `whale-watch demo`
+
