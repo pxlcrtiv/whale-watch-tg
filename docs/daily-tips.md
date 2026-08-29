@@ -54,3 +54,10 @@ Public proof-of-reserve trackers (alternative.me, CryptoQuant, Glassnode free ti
 
 > `whale-watch status`
 
+
+## 2026-08-30 — Whale tip of the day: Timestamp discipline: block time ≠ execution time
+
+A transfer's block timestamp is when the block was minted, not when the tx was submitted. Whale scanners showing 'actionable NOW' are really showing 'actionable ~12s ago at best'. For speed, pair on-chain alerts with mempool sniffing; for truth, always cite block height, not clock time, in alert metadata.
+
+> `whale-watch demo`
+
