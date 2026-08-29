@@ -47,3 +47,10 @@ Attackers airdrop tiny amounts (dust) to many wallets to cluster them (privacy d
 
 > `whale-watch demo`
 
+
+## 2026-08-29 — Whale tip of the day: Exchange reserve data is a public good
+
+Public proof-of-reserve trackers (alternative.me, CryptoQuant, Glassnode free tier) show aggregate CEX balances. Combined with your own whale alerts: falling exchange ETH reserves + repeated whale *outflows* = supply being locked away — historically a bullish structural shift. Reserves are lagging; your alerts are leading.
+
+> `whale-watch status`
+
