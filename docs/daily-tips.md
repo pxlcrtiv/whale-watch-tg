@@ -61,3 +61,10 @@ A transfer's block timestamp is when the block was minted, not when the tx was s
 
 > `whale-watch demo`
 
+
+## 2026-08-31 — Whale tip of the day: Chain splits: what works on Ethereum generalizes
+
+The Transfer-event scanner is chain-agnostic — same topic0 on polygon, arbitrum, base, optimism. What changes: token addresses, RPC endpoints, and the exchange wallet map. A multi-chain whale watcher is one tokens.json and one known_addresses.json away. Start single-chain, keep the data files the extension point.
+
+> `whale-watch watch`
+
