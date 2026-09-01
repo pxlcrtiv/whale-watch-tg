@@ -68,3 +68,10 @@ The Transfer-event scanner is chain-agnostic — same topic0 on polygon, arbitru
 
 > `whale-watch watch`
 
+
+## 2026-09-01 — Whale tip of the day: Backtest your alert thresholds before you trust them
+
+The honest way to tune a whale alert: replay historical Transfer logs through your exact pipeline (enrichment → filter → narrative) over 90 days, count alerts that preceded notable price moves vs noise. If your 'mega move' threshold fires 200 times a week, it's not a signal, it's a screensaver. whale-watch fixtures make this replay testable offline.
+
+> `whale-watch demo`
+
