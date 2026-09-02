@@ -75,3 +75,10 @@ The honest way to tune a whale alert: replay historical Transfer logs through yo
 
 > `whale-watch demo`
 
+
+## 2026-09-02 — Whale tip of the day: Privacy rails change the meaning of 'exchange'
+
+Deposits via Tornado Cash, Railgun, or relayer contracts rarely hit the exchange hot wallet directly — they arrive from a pool or a private relayer address first. A scanner that tags only raw addresses will classify a big private deposit as 'wallet-to-wallet'. Keep a denylist/known-relayer list updated, or accept the blind spot consciously.
+
+> `whale-watch watch`
+
