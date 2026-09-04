@@ -96,3 +96,10 @@ The core whale-watch signal: ERC-20 transfers INTO an exchange hot wallet usuall
 
 > `whale-watch demo`
 
+
+## 2026-09-05 — Whale tip of the day: The Transfer event is the whole game
+
+Every ERC-20 movement emits `Transfer(from, to, value)` with topic0 = keccak256("Transfer(address,address,uint256)") = 0xddf252ad…b3ef. A whale scanner is mostly a filter over eth_getLogs for that signature — sender in topics[1], receiver in topics[2], amount in data. Know those three fields and you can track any token without indexing every block yourself.
+
+> `curl -s -X POST https://ethereum-rpc.publicnode.com -H 'Content-Type: application/json' --data '{"jsonrpc":"2.0","id":1,"method":"eth_getLogs","params":[{"fromBlock":"0x1312d00","toBlock":"0x1312d00","address":"0xdac17f958d2ee523a2206206994597c13d831ec7","topics":["0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"]}]}'`
+
