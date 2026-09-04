@@ -89,3 +89,10 @@ Day-trading whale alerts is a zero-sum race against MEV bots and OTC desks. The 
 
 > `whale-watch demo`
 
+
+## 2026-09-04 — Whale tip of the day: Exchange inflow ≈ sell pressure — but it's a heuristic, not a fact
+
+The core whale-watch signal: ERC-20 transfers INTO an exchange hot wallet usually precede sell orders, and outflows usually mean accumulation. It is a strong prior, not a guarantee — exchanges also rebalance internally (hot→cold), and OTC desks settle off-chain. Always read the size, the target (hot vs cold wallet), and the entity before acting.
+
+> `whale-watch demo`
+
