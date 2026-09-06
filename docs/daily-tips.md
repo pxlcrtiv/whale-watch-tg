@@ -103,3 +103,10 @@ Every ERC-20 movement emits `Transfer(from, to, value)` with topic0 = keccak256(
 
 > `curl -s -X POST https://ethereum-rpc.publicnode.com -H 'Content-Type: application/json' --data '{"jsonrpc":"2.0","id":1,"method":"eth_getLogs","params":[{"fromBlock":"0x1312d00","toBlock":"0x1312d00","address":"0xdac17f958d2ee523a2206206994597c13d831ec7","topics":["0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"]}]}'`
 
+
+## 2026-09-06 — Whale tip of the day: Decimals: 10^18 is not 1 token
+
+Raw ERC-20 amounts are integers in the token's smallest unit. USDT uses 6 decimals, most ERC-20s use 18, WBTC uses 8. A log with value=0x1027E72F1F1281300 (≈300,000,000,000,000,000,000) is 300 *USDT* if you divide by 10^6 — but 300 ETH if you divide by 10^18. whale-watch stores decimals per token precisely because this mistake produces phantom 'whales'.
+
+> `whale-watch status`
+
