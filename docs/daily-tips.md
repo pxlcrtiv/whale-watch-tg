@@ -110,3 +110,10 @@ Raw ERC-20 amounts are integers in the token's smallest unit. USDT uses 6 decima
 
 > `whale-watch status`
 
+
+## 2026-09-07 — Whale tip of the day: Hot wallets vs cold wallets tell different stories
+
+Exchange hot wallets (small balances, high churn) hold customer funds for withdrawal flow; cold wallets are the exchange's own treasury. An inflow to the *hot* wallet is often ordinary deposits; an inflow to the *cold*/treasury wallet is a real position change. Two Binance addresses can mean opposite things — tag them both, weight them differently.
+
+> `whale-watch watch --subscribe 0x28c6c06298d514db089934071355e5743bf21d60`
+
