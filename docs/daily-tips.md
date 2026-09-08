@@ -117,3 +117,10 @@ Exchange hot wallets (small balances, high churn) hold customer funds for withdr
 
 > `whale-watch watch --subscribe 0x28c6c06298d514db089934071355e5743bf21d60`
 
+
+## 2026-09-08 — Whale tip of the day: USDT mints/burns are a liquidity early-warning
+
+Tether Treasury (0x5754284f…b949) mints USDT when demand for stablecoin liquidity rises and burns when it falls. A cluster of large mints often precedes risk-on buying (fiat ramp into crypto); near-term burn spikes appear before de-risking. It's one of the few on-chain signals that leads price rather than lags it.
+
+> `whale-watch watch --subscribe 0x5754284f345afc66a98fbb0a0afe71e0f007b949`
+
