@@ -124,3 +124,10 @@ Tether Treasury (0x5754284f…b949) mints USDT when demand for stablecoin liquid
 
 > `whale-watch watch --subscribe 0x5754284f345afc66a98fbb0a0afe71e0f007b949`
 
+
+## 2026-09-09 — Whale tip of the day: Same-entity transfers are the #1 false positive
+
+An exchange moving 40,000 ETH from its hot wallet to its own cold wallet looks exactly like a whale withdrawal on a naive scanner. Rule: if sender and receiver share the same tagged entity, classify as internal rebalancing — usually noise. whale-watch marks these 'internal' instead of 'sell pressure'.
+
+> `whale-watch demo`
+
