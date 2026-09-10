@@ -131,3 +131,10 @@ An exchange moving 40,000 ETH from its hot wallet to its own cold wallet looks e
 
 > `whale-watch demo`
 
+
+## 2026-09-10 — Whale tip of the day: HODL waves: the age of unspent coins is a whale tell
+
+Coins that haven't moved in 3+ years are 'old whales' or lost coins. When a pre-2021 address suddenly transfers 50,000 ETH, exchanges hold the proceeds within hours and the market frequently knocks. Age-of-coins (HODL waves) is free on public datasets and filters out the 95% of churn that's just CEX internals.
+
+> `whale-watch watch --interval 30`
+
