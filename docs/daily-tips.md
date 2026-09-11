@@ -138,3 +138,10 @@ Coins that haven't moved in 3+ years are 'old whales' or lost coins. When a pre-
 
 > `whale-watch watch --interval 30`
 
+
+## 2026-09-11 — Whale tip of the day: MVRV and SOPR put whale moves in context
+
+A whale deposit into Binance at MVRV > 3.5 (holders in deep profit) is more bearish than the same deposit at MVRV 1.1. SOPR > 1 means the seller realizes profit. On-chain scanners answer 'what moved'; MVRV/SOPR answer 'what it means' — combine both before concluding anything about price.
+
+> `whale-watch demo`
+
