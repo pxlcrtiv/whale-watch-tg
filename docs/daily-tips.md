@@ -145,3 +145,10 @@ A whale deposit into Binance at MVRV > 3.5 (holders in deep profit) is more bear
 
 > `whale-watch demo`
 
+
+## 2026-09-12 — Whale tip of the day: Funding rates tell you who's leverage-long the same move
+
+Perpetual funding > 0.05%/8h with a whale dumping into the spot market = longs paying to stay long while spot supply grows. That combination historically precedes cascades. Whale alerts are most actionable when the derivative side agrees with the spot signal — watch both, act on the agreement.
+
+> `whale-watch watch --send-telegram`
+
