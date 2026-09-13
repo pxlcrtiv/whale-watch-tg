@@ -152,3 +152,10 @@ Perpetual funding > 0.05%/8h with a whale dumping into the spot market = longs p
 
 > `whale-watch watch --send-telegram`
 
+
+## 2026-09-13 — Whale tip of the day: ERC-20 events are NOT confirmed transactions
+
+eth_getLogs returns events from *proposed* blocks. Reorgs (including 51% and even simple node divergence days) can drop or reorder them. Cursor-safe scanners must store (tx_hash, log_index) and tolerate reprocessing — an event that disappears after a reorg should never be re-alerted. whale-watch dedupes on that exact key.
+
+> `whale-watch status`
+
