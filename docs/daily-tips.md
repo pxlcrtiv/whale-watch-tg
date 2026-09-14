@@ -159,3 +159,10 @@ eth_getLogs returns events from *proposed* blocks. Reorgs (including 51% and eve
 
 > `whale-watch status`
 
+
+## 2026-09-14 — Whale tip of the day: Public RPCs cap eth_getLogs ranges — batch or die
+
+Free public endpoints (publicnode, llamarpc, Ankr) usually reject log queries spanning more than a few thousand blocks. A production scanner batches cursor→cursor+N blocks, retries on rejection, and persists the cursor after every batch — never all-or-nothing. That's the whole cursor-safe design in one sentence.
+
+> `whale-watch watch --batch 2000`
+
