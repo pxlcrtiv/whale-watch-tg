@@ -166,3 +166,10 @@ Free public endpoints (publicnode, llamarpc, Ankr) usually reject log queries sp
 
 > `whale-watch watch --batch 2000`
 
+
+## 2026-09-15 — Whale tip of the day: A whale is a size class, not an identity
+
+Common working definitions: ≥1,000 ETH, ≥1% of a token's supply, or USD flows ≥ $1M in a single tx. For stablecoins, $10M+ is a 'mega move'. Pick thresholds per token: 1,000,000 PEPE is dust; 1,000 ETH is a whale. whale-watch's rate classes (WATCH/LARGE/MEGA) are exactly this idea done in code.
+
+> `whale-watch demo`
+
