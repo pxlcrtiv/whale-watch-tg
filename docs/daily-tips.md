@@ -173,3 +173,10 @@ Common working definitions: ≥1,000 ETH, ≥1% of a token's supply, or USD flow
 
 > `whale-watch demo`
 
+
+## 2026-09-16 — Whale tip of the day: MEV and private relays hide whale trades from the mempool
+
+Since 0xAA and flashbots, many large orders never appear in the public mempool — they're bundled and sent straight to validators. If you only watch the mempool you'll miss the biggest trades. On-chain (finalized) tracking catches them all, just a few seconds later. Latency trade-off, not a blind spot.
+
+> `whale-watch watch`
+
