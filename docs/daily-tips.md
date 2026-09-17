@@ -180,3 +180,10 @@ Since 0xAA and flashbots, many large orders never appear in the public mempool â
 
 > `whale-watch watch`
 
+
+## 2026-09-17 â€” Whale tip of the day: Stablecoin exchange flows lead BTC direction
+
+A recurring empirical pattern: stablecoin inflows (USDT/USDC to exchanges) rise before BTC buying pressure; outflow spikes precede selling. The theory: stablecoins are the 'dry powder' that converts into BTC/ETH. Track exchange stablecoin balances as a leading indicator alongside whale moves.
+
+> `whale-watch watch --subscribe 0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48`
+
