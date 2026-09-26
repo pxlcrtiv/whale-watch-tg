@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Architecture Report — /Users/admin/portfolio/repos/whale-watch-tg</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>mermaid{background:transparent;}</style>
+</head>
+<body class="bg-gray-950 text-gray-200 p-6 max-w-5xl mx-auto">
+<h1 class="text-2xl font-bold text-white mb-1">Architecture Report</h1>
+<p class="text-sm text-gray-500 mb-6">/Users/admin/portfolio/repos/whale-watch-tg — scanned 2026-09-26T14:38:25.367538+00:00</p>
+
+<div class="grid grid-cols-3 gap-4 mb-8">
+  <div class="bg-gray-900 rounded-lg p-4 text-center">
+    <div class="text-3xl font-bold text-white">25</div>
+    <div class="text-xs text-gray-500 mt-1">Python files</div>
+  </div>
+  <div class="bg-gray-900 rounded-lg p-4 text-center">
+    <div class="text-3xl font-bold text-white">25</div>
+    <div class="text-xs text-gray-500 mt-1">Modules analyzed</div>
+  </div>
+  <div class="bg-gray-900 rounded-lg p-4 text-center">
+    <div class="text-3xl font-bold text-green-400">0</div>
+    <div class="text-xs text-gray-500 mt-1">Import cycles</div>
+  </div>
+</div>
+
+
+    <div class="bg-gray-900 border border-amber-500/30 rounded-lg p-4 mb-6">
+      <div class="text-sm text-amber-400 font-semibold mb-1">Top recommendation</div>
+      <code class="text-white">tests/conftest.py</code>
+      <p class="text-sm text-gray-400 mt-1">Shallow module: 5 exports, 68 lines</p>
+      <p class="text-xs text-gray-600 mt-2">Run the full <code>improve-codebase-architecture</code> skill on this repo to grill through the deepening.</p>
+    </div>
+
+        <h2 class="text-lg font-semibold text-white mt-8 mb-3">Shallow Modules</h2>
+        
+        <div class="bg-gray-900 rounded-lg p-4 mb-3">
+          <div class="flex justify-between items-start mb-3">
+            <code class="text-sm text-amber-400">tests/conftest.py</code>
+            <span class="inline-block px-2 py-0.5 rounded text-xs font-bold text-white bg-amber-500">Worth exploring</span>
+          </div>
+          <div class="grid grid-cols-2 gap-4 text-xs">
+            <div class="bg-gray-800 rounded p-3">
+              <div class="text-gray-500 mb-1">BEFORE — shallow</div>
+              <div class="text-gray-300">5 exports (storage, fixtures, FakeProvider, raw_log)<br>68 lines, ? decisions</div>
+            </div>
+            <div class="bg-gray-800 rounded p-3">
+              <div class="text-gray-500 mb-1">AFTER — deepened</div>
+              <div class="text-gray-300">Hide internals behind a seam<br>Reduce public surface by half</div>
+            </div>
+          </div>
+          <p class="text-xs text-gray-600 mt-2">Leverage: callers depend on fewer names. Locality: logic moves behind the interface.</p>
+        </div>
+        <div class="bg-gray-900 rounded-lg p-4 mb-3">
+          <div class="flex justify-between items-start mb-3">
+            <code class="text-sm text-amber-400">tests/test_daily_update.py</code>
+            <span class="inline-block px-2 py-0.5 rounded text-xs font-bold text-white bg-amber-500">Worth exploring</span>
+          </div>
+          <div class="grid grid-cols-2 gap-4 text-xs">
+            <div class="bg-gray-800 rounded p-3">
+              <div class="text-gray-500 mb-1">BEFORE — shallow</div>
+              <div class="text-gray-300">5 exports (test_no_entries_means_today_only, test_up_to_date_means_no_work, test_gap_backfills_each_missed_day, test_backfill_is_capped)<br>40 lines, ? decisions</div>
+            </div>
+            <div class="bg-gray-800 rounded p-3">
+              <div class="text-gray-500 mb-1">AFTER — deepened</div>
+              <div class="text-gray-300">Hide internals behind a seam<br>Reduce public surface by half</div>
+            </div>
+          </div>
+          <p class="text-xs text-gray-600 mt-2">Leverage: callers depend on fewer names. Locality: logic moves behind the interface.</p>
+        </div>
+        <div class="bg-gray-900 rounded-lg p-4 mb-3">
+          <div class="flex justify-between items-start mb-3">
+            <code class="text-sm text-amber-400">tests/test_daily_pool.py</code>
+            <span class="inline-block px-2 py-0.5 rounded text-xs font-bold text-white bg-amber-500">Worth exploring</span>
+          </div>
+          <div class="grid grid-cols-2 gap-4 text-xs">
+            <div class="bg-gray-800 rounded p-3">
+              <div class="text-gray-500 mb-1">BEFORE — shallow</div>
+              <div class="text-gray-300">5 exports (test_pool_has_at_least_20_tips, test_pool_entries_are_unique_and_complete, test_rotation_is_deterministic, test_adjacent_days_rotate)<br>42 lines, ? decisions</div>
+            </div>
+            <div class="bg-gray-800 rounded p-3">
+              <div class="text-gray-500 mb-1">AFTER — deepened</div>
+              <div class="text-gray-300">Hide internals behind a seam<br>Reduce public surface by half</div>
+            </div>
+          </div>
+          <p class="text-xs text-gray-600 mt-2">Leverage: callers depend on fewer names. Locality: logic moves behind the interface.</p>
+        </div>
+        <div class="bg-gray-900 rounded-lg p-4 mb-3">
+          <div class="flex justify-between items-start mb-3">
+            <code class="text-sm text-amber-400">tests/test_summarizer.py</code>
+            <span class="inline-block px-2 py-0.5 rounded text-xs font-bold text-white bg-amber-500">Worth exploring</span>
+          </div>
+          <div class="grid grid-cols-2 gap-4 text-xs">
+            <div class="bg-gray-800 rounded p-3">
+              <div class="text-gray-500 mb-1">BEFORE — shallow</div>
+              <div class="text-gray-300">6 exports (test_template_narratives_cover_all_directions, test_unconfigured_llm_falls_back_to_template, test_build_alert_produces_full_subscriber_text, test_mega_and_watch_rate_classes)<br>76 lines, ? decisions</div>
+            </div>
+            <div class="bg-gray-800 rounded p-3">
+              <div class="text-gray-500 mb-1">AFTER — deepened</div>
+              <div class="text-gray-300">Hide internals behind a seam<br>Reduce public surface by half</div>
+            </div>
+          </div>
+          <p class="text-xs text-gray-600 mt-2">Leverage: callers depend on fewer names. Locality: logic moves behind the interface.</p>
+        </div>
+        <div class="bg-gray-900 rounded-lg p-4 mb-3">
+          <div class="flex justify-between items-start mb-3">
+            <code class="text-sm text-amber-400">tests/test_storage.py</code>
+            <span class="inline-block px-2 py-0.5 rounded text-xs font-bold text-white bg-amber-500">Worth exploring</span>
+          </div>
+          <div class="grid grid-cols-2 gap-4 text-xs">
+            <div class="bg-gray-800 rounded p-3">
+              <div class="text-gray-500 mb-1">BEFORE — shallow</div>
+              <div class="text-gray-300">6 exports (test_subscribe_unsubscribe_roundtrip, test_watched_addresses_and_chat_routing, test_event_dedupe_on_tx_log_pair, test_cursor_save_and_load)<br>70 lines, ? decisions</div>
+            </div>
+            <div class="bg-gray-800 rounded p-3">
+              <div class="text-gray-500 mb-1">AFTER — deepened</div>
+              <div class="text-gray-300">Hide internals behind a seam<br>Reduce public surface by half</div>
+            </div>
+          </div>
+          <p class="text-xs text-gray-600 mt-2">Leverage: callers depend on fewer names. Locality: logic moves behind the interface.</p>
+        </div>
+        <div class="bg-gray-900 rounded-lg p-4 mb-3">
+          <div class="flex justify-between items-start mb-3">
+            <code class="text-sm text-amber-400">tests/test_enrich.py</code>
+            <span class="inline-block px-2 py-0.5 rounded text-xs font-bold text-white bg-amber-500">Worth exploring</span>
+          </div>
+          <div class="grid grid-cols-2 gap-4 text-xs">
+            <div class="bg-gray-800 rounded p-3">
+              <div class="text-gray-500 mb-1">BEFORE — shallow</div>
+              <div class="text-gray-300">5 exports (test_known_exchange_is_tagged, test_unknown_address_is_none, test_tagging_is_case_insensitive, test_direction_classification)<br>45 lines, ? decisions</div>
+            </div>
+            <div class="bg-gray-800 rounded p-3">
+              <div class="text-gray-500 mb-1">AFTER — deepened</div>
+              <div class="text-gray-300">Hide internals behind a seam<br>Reduce public surface by half</div>
+            </div>
+          </div>
+          <p class="text-xs text-gray-600 mt-2">Leverage: callers depend on fewer names. Locality: logic moves behind the interface.</p>
+        </div>
+<h2 class="text-lg font-semibold text-white mt-8 mb-3">High Coupling</h2>
+        <div class="bg-gray-900 rounded-lg p-4 mb-3">
+          <code class="text-sm text-purple-400">tests/test_preview.py</code>
+          <p class="text-xs text-gray-500 mt-1">Imports 4 internal modules: whale_watch, whale_watch, whale_watch, whale_watch</p>
+        </div>
+        <div class="bg-gray-900 rounded-lg p-4 mb-3">
+          <code class="text-sm text-purple-400">tests/test_summarizer.py</code>
+          <p class="text-xs text-gray-500 mt-1">Imports 4 internal modules: tests, whale_watch, whale_watch, whale_watch</p>
+        </div>
+        <div class="bg-gray-900 rounded-lg p-4 mb-3">
+          <code class="text-sm text-purple-400">whale_watch/cli.py</code>
+          <p class="text-xs text-gray-500 mt-1">Imports 10 internal modules: enrich, fixtures, preview, storage, enrich</p>
+        </div>
+
+
+    <h2 class="text-lg font-semibold text-white mt-8 mb-3">Dependency Graph</h2>
+    <div class="bg-gray-900 rounded-lg p-4 mb-3">
+      <pre class="text-xs text-gray-400 overflow-x-auto">graph TD
+  tests_conftest_py --> __future__
+  tests_conftest_py --> sys
+  tests_conftest_py --> pathlib
+  tests_conftest_py --> pytest
+  tests_conftest_py --> whale_watch
+  tests_test_daily_update_py --> datetime
+  tests_test_daily_update_py --> scripts
+  tests_test_preview_py --> whale_watch
+  tests_test_preview_py --> decimal
+  tests_test_daily_pool_py --> json
+  tests_test_daily_pool_py --> datetime
+  tests_test_daily_pool_py --> pathlib
+  tests_test_daily_pool_py --> scripts
+  tests_test_summarizer_py --> decimal
+  tests_test_summarizer_py --> tests
+  tests_test_summarizer_py --> whale_watch
+  tests_test_rate_limit_py --> decimal
+  tests_test_rate_limit_py --> whale_watch
+  tests_test_storage_py --> tests
+  tests_test_storage_py --> whale_watch
+  tests_test_fixtures_py --> json
+  tests_test_fixtures_py --> decimal
+  tests_test_fixtures_py --> pathlib
+  tests_test_fixtures_py --> whale_watch
+  tests_test_enrich_py --> tests
+  tests_test_enrich_py --> whale_watch
+  tests_test_bot_py --> asyncio
+  tests_test_bot_py --> tests
+  tests_test_bot_py --> whale_watch
+  tests_test_bot_py --> telegram
+  tests_test_cli_py --> whale_watch
+  tests_test_cli_py --> os
+  tests_test_cli_py --> argparse
+  tests_test_watcher_py --> decimal
+  tests_test_watcher_py --> pytest
+  tests_test_watcher_py --> tests
+  tests_test_watcher_py --> whale_watch
+  tests_test_watcher_py --> os
+  tests_test_demo_py --> whale_watch
+  scripts_daily_update_py --> __future__
+  scripts_daily_update_py --> datetime
+  scripts_daily_update_py --> json
+  scripts_daily_update_py --> os
+  scripts_daily_update_py --> re
+  scripts_daily_update_py --> subprocess
+  scripts_daily_update_py --> sys
+  scripts_daily_update_py --> pathlib
+  whale_watch_preview_py --> __future__
+  whale_watch_preview_py --> html
+  whale_watch_preview_py --> datetime
+  whale_watch_preview_py --> pathlib
+  whale_watch_preview_py --> enrich
+  whale_watch_preview_py --> model
+  whale_watch_enrich_py --> __future__
+  whale_watch_enrich_py --> json
+  whale_watch_enrich_py --> pathlib
+  whale_watch_model_py --> __future__
+  whale_watch_model_py --> dataclasses
+  whale_watch_model_py --> decimal
+  whale_watch_bot_py --> __future__
+  whale_watch_bot_py --> logging
+  whale_watch_bot_py --> os
+  whale_watch_bot_py --> re
+  whale_watch_bot_py --> time
+  whale_watch_bot_py --> telegram
+  whale_watch_bot_py --> storage
+  whale_watch_cli_py --> __future__
+  whale_watch_cli_py --> argparse
+  whale_watch_cli_py --> logging
+  whale_watch_cli_py --> sys
+  whale_watch_cli_py --> time
+  whale_watch_cli_py --> datetime
+  whale_watch_cli_py --> pathlib
+  whale_watch_cli_py --> enrich
+  whale_watch_cli_py --> fixtures
+  whale_watch_cli_py --> preview
+  whale_watch_cli_py --> storage
+  whale_watch_cli_py --> summarizer
+  whale_watch_cli_py --> watcher
+  whale_watch_cli_py --> bot
+  whale_watch_storage_py --> __future__
+  whale_watch_storage_py --> sqlite3
+  whale_watch_storage_py --> datetime
+  whale_watch_storage_py --> pathlib
+  whale_watch_storage_py --> model
+  whale_watch_summarizer_py --> __future__
+  whale_watch_summarizer_py --> json
+  whale_watch_summarizer_py --> os
+  whale_watch_summarizer_py --> urllib
+  whale_watch_summarizer_py --> datetime
+  whale_watch_summarizer_py --> decimal
+  whale_watch_summarizer_py --> enrich
+  whale_watch_summarizer_py --> model
+  whale_watch_watcher_py --> __future__
+  whale_watch_watcher_py --> logging
+  whale_watch_watcher_py --> dataclasses
+  whale_watch_watcher_py --> decimal
+  whale_watch_watcher_py --> model
+  whale_watch_watcher_py --> web3
+  whale_watch_fixtures_py --> __future__
+  whale_watch_fixtures_py --> json
+  whale_watch_fixtures_py --> datetime
+  whale_watch_fixtures_py --> decimal
+  whale_watch_fixtures_py --> pathlib
+  whale_watch_fixtures_py --> enrich
+  whale_watch_fixtures_py --> model
+  whale_watch_fixtures_py --> summarizer</pre>
+    </div>
+
+</body>
+</html>
