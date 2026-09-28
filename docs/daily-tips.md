@@ -257,3 +257,10 @@ Deposits via Tornado Cash, Railgun, or relayer contracts rarely hit the exchange
 
 > `whale-watch watch`
 
+
+## 2026-09-28 — Whale tip of the day: Ships weekly, not hourly: cadence beats noise
+
+Day-trading whale alerts is a zero-sum race against MEV bots and OTC desks. The durable edge is *weekly synthesis*: net exchange flows per token, top-10 flows, accumulation clusters — delivered as a single readable digest. The alert is for awareness; the digest is for decision. Both, in that order.
+
+> `whale-watch demo`
+
