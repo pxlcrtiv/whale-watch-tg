@@ -306,3 +306,10 @@ An exchange moving 40,000 ETH from its hot wallet to its own cold wallet looks e
 
 > `whale-watch demo`
 
+
+## 2026-10-06 — Whale tip of the day: MVRV and SOPR put whale moves in context
+
+A whale deposit into Binance at MVRV > 3.5 (holders in deep profit) is more bearish than the same deposit at MVRV 1.1. SOPR > 1 means the seller realizes profit. On-chain scanners answer 'what moved'; MVRV/SOPR answer 'what it means' — combine both before concluding anything about price.
+
+> `whale-watch demo`
+
