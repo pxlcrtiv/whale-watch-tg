@@ -561,6 +561,7 @@ Large OTC settlements are often settled from cold wallets to an under-the-radar 
 
 ## 2026-11-11 — Whale tip of the day: Dust attacks and address contamination
 
+<<<<<<< Updated upstream
 Attackers airdrop tiny amounts (dust) to many wallets to cluster them (privacy deanonymization). If you subscribe to every address that 'sent you dust', you'll build a map of clusters — and scanners that alert on dust-level transfers teach you nothing. Filter by minimum USD value; whale-watch's WATCH class starts at $100K per transfer.
 
 > `whale-watch demo`
@@ -578,4 +579,14 @@ Public proof-of-reserve trackers (alternative.me, CryptoQuant, Glassnode free ti
 A transfer's block timestamp is when the block was minted, not when the tx was submitted. Whale scanners showing 'actionable NOW' are really showing 'actionable ~12s ago at best'. For speed, pair on-chain alerts with mempool sniffing; for truth, always cite block height, not clock time, in alert metadata.
 
 > `whale-watch demo`
+
+=======
+Attackers airdrop tiny amounts (dust) to many wallets 
+>>>>>>> Stashed changes
+
+## 2026-11-14 — Whale tip of the day: Chain splits: what works on Ethereum generalizes
+
+The Transfer-event scanner is chain-agnostic — same topic0 on polygon, arbitrum, base, optimism. What changes: token addresses, RPC endpoints, and the exchange wallet map. A multi-chain whale watcher is one tokens.json and one known_addresses.json away. Start single-chain, keep the data files the extension point.
+
+> `whale-watch watch`
 
