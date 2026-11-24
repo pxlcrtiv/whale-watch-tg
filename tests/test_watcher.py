@@ -42,8 +42,51 @@ def test_scan_filters_to_watched_addresses(storage):
     assert result.cursor == 25
 
 
+def test_scan_enforces_token_filter(storage):
+    storage.add_subscription(1, WHALE, "USDT")
+    usdc = "0x" + "2" * 40
+    rows = _usdt_logs(20, 10**6, tx="0xusdt") + [
+        raw_log(
+            "0xusdc", 0, 20, usdc,
+            [TRANSFER_TOPIC, topic_addr(WHALE), topic_addr(BINANCE)],
+            hex(10**6),
+        )
+    ]
+    tokens = _tokens() | {usdc: {"symbol": "USDC", "decimals": 6}}
+    scanner = EventScanner(storage, FakeProvider(rows, latest=25), tokens, start_block=10)
+
+    result = scanner.scan_once()
+
+    assert result.new_events == 1
+    assert [transfer.token for transfer in result.alerts] == ["USDT"]
+    assert storage.counts()["events"] == 1
+
+
+def test_scan_reloads_subscription_changes(storage):
+    storage.add_subscription(1, WHALE, "USDT")
+    scanner = EventScanner(storage, FakeProvider([], latest=10), _tokens(), start_block=0)
+    scanner.scan_once()
+
+    storage.add_subscription(1, WHALE, "USDC")
+    usdc = "0x" + "2" * 40
+    rows = [
+        raw_log(
+            "0xusdc", 0, 11, usdc,
+            [TRANSFER_TOPIC, topic_addr(WHALE), topic_addr(BINANCE)],
+            hex(10**6),
+        )
+    ]
+    tokens = _tokens() | {usdc: {"symbol": "USDC", "decimals": 6}}
+    scanner = EventScanner(storage, FakeProvider(rows, latest=11), tokens, start_block=0)
+
+    result = scanner.scan_once()
+
+    assert result.new_events == 1
+    assert [transfer.token for transfer in result.alerts] == ["USDC"]
+
+
 def test_unwatched_transfers_produce_no_events(storage):
-    # Nobody watches WHALE's address — the log must be dropped before decode cost.
+    # Nobody watches WHALE's address — no event should be persisted.
     provider = FakeProvider(_usdt_logs(20, 10**6), latest=25)
     scanner = EventScanner(storage, provider, _tokens(), start_block=10)
     result = scanner.scan_once()

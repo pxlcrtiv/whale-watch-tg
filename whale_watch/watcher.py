@@ -106,8 +106,8 @@ class EventScanner:
     # ---------------------------------------------------------------- scanning
     def scan_once(self, latest: int | None = None) -> ScanResult:
         """Scan cursor+1 .. latest in batches. Never skips; never duplicates."""
-        watched = self.storage.all_watched_addresses()
-        if not watched or not self.tokens:
+        plan = self.storage.watch_plan()
+        if not plan or not self.tokens:
             return ScanResult(0, 0, 0, [], self.storage.get_cursor(self.chain))
 
         latest = latest if latest is not None else self.provider.get_block_number()
@@ -140,7 +140,7 @@ class EventScanner:
                     transfer = self._decode(raw, meta["symbol"], meta["decimals"], address.lower())
                     if transfer is None:
                         continue
-                    if not self._matches_watch(watched, transfer):
+                    if not plan.matches(transfer):
                         continue
                     if self.storage.record_event(transfer):
                         new_events += 1
@@ -150,9 +150,6 @@ class EventScanner:
         return ScanResult(pos - cursor, logs_seen, new_events, alerts, pos)
 
     # ------------------------------------------------------------------ decoding
-    def _matches_watch(self, watched: set[str], transfer: Transfer) -> bool:
-        return transfer.from_addr in watched or transfer.to_addr in watched
-
     def _decode(self, raw: dict, symbol: str, decimals: int, token_address: str) -> Transfer | None:
         topics = raw.get("topics") or []
         if len(topics) != 3:

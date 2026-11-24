@@ -80,7 +80,7 @@ def cmd_watch(args: argparse.Namespace) -> int:
     if args.console_subscribe:
         for addr in args.console_subscribe:
             storage.add_subscription(DEMO_CHAT_ID, addr)
-    if not storage.all_watched_addresses():
+    if not storage.watch_plan():
         print("No subscriptions yet — watching Binance hot wallet by default.")
         print("Add more with `whale-watch watch --subscribe 0x…` or via the bot.")
         storage.add_subscription(DEMO_CHAT_ID, "0x28c6c06298d514db089934071355e5743bf21d60")
@@ -123,8 +123,7 @@ def cmd_watch(args: argparse.Namespace) -> int:
 
 def _deliver(storage: Storage, app, transfer, text: str) -> None:
     """Route an alert to every subscribed chat (or the console demo chat)."""
-    chats = storage.chats_for_address(transfer.from_addr) + storage.chats_for_address(transfer.to_addr)
-    chats = sorted(set(chats))
+    chats = sorted(storage.watch_plan().chats_for(transfer))
     for chat in chats:
         ok, reason = storage.alert_allowed(chat)
         if not ok:

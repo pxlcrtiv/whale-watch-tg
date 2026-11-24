@@ -8,6 +8,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from .model import Transfer
+from .subscriptions import Subscription, WatchPlan
 
 
 def utc_now() -> int:
@@ -73,11 +74,17 @@ class Storage:
 
     # ------------------------------------------------------------ subscriptions
     def add_subscription(self, chat_id: int, address: str, token: str = "*") -> bool:
-        """Returns True if newly subscribed, False if it already existed."""
+        """Returns True if newly subscribed; updates the token filter if it existed."""
+        subscription = Subscription(chat_id, address, token)
         cur = self._conn.execute(
             "INSERT OR IGNORE INTO subscriptions (chat_id, address, token, created_at) VALUES (?, ?, ?, ?)",
-            (chat_id, address.lower(), token, utc_now()),
+            (subscription.chat_id, subscription.address, subscription.token, utc_now()),
         )
+        if cur.rowcount == 0:
+            self._conn.execute(
+                "UPDATE subscriptions SET token = ? WHERE chat_id = ? AND address = ?",
+                (subscription.token, subscription.chat_id, subscription.address),
+            )
         self._conn.commit()
         return cur.rowcount > 0
 
@@ -98,14 +105,11 @@ class Storage:
             ).fetchall()
         return [dict(r) for r in rows]
 
-    def chats_for_address(self, address: str) -> list[int]:
+    def watch_plan(self) -> WatchPlan:
         rows = self._conn.execute(
-            "SELECT DISTINCT chat_id FROM subscriptions WHERE address = ?", (address.lower(),)
+            "SELECT chat_id, address, token FROM subscriptions ORDER BY rowid"
         ).fetchall()
-        return [r["chat_id"] for r in rows]
-
-    def all_watched_addresses(self) -> set[str]:
-        return {r["address"] for r in self._conn.execute("SELECT DISTINCT address FROM subscriptions")}
+        return WatchPlan(tuple(Subscription(r["chat_id"], r["address"], r["token"]) for r in rows))
 
     # ------------------------------------------------------------------ events
     def record_event(self, transfer: Transfer) -> bool:
