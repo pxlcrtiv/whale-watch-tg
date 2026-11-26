@@ -53,7 +53,16 @@ def test_subscribe_adds_row(storage):
     msg = FakeMessage()
     _run(cmd_subscribe(FakeUpdate(msg), FakeContext(storage, args=[BINANCE, "USDT"])))
     assert storage.list_subscriptions(42)[0]["address"] == BINANCE
+    assert storage.list_subscriptions(42)[0]["token"] == "USDT"
     assert msg.replies[0].startswith("✅")
+
+
+def test_subscribe_updates_existing_token_filter(storage):
+    storage.add_subscription(42, BINANCE, "*")
+    msg = FakeMessage()
+    _run(cmd_subscribe(FakeUpdate(msg), FakeContext(storage, args=[BINANCE, "usdt"])))
+    assert storage.list_subscriptions(42)[0]["token"] == "USDT"
+    assert "updated token filter" in msg.replies[0]
 
 
 def test_subscribe_rejects_bad_address(storage):

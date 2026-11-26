@@ -44,6 +44,35 @@ def test_status_with_subscription(tmp_path, capsys):
     assert "chat 11" in out and ("a" * 40) in out
 
 
+def test_delivery_uses_the_same_token_filter_as_scanning(storage, capsys):
+    from decimal import Decimal
+
+    from tests.conftest import BINANCE, USDT, WHALE
+    from whale_watch.model import Transfer
+
+    storage.add_subscription(1, WHALE, "USDT")
+    storage.add_subscription(2, BINANCE, "USDC")
+    transfer = Transfer(
+        tx_hash="0xabc",
+        log_index=0,
+        block=1,
+        timestamp=None,
+        token="USDT",
+        token_address=USDT,
+        from_addr=WHALE,
+        to_addr=BINANCE,
+        amount=Decimal(1000),
+    )
+
+    cli._deliver(storage, None, transfer, "USDT alert")
+
+    output = capsys.readouterr().out
+    assert "→ chat 1" in output
+    assert "→ chat 2" not in output
+    assert storage.alert_seen(1, transfer)
+    assert not storage.alert_seen(2, transfer)
+
+
 def test_bot_requires_token(tmp_path, capsys):
     import os
 

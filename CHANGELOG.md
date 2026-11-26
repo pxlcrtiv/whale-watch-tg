@@ -11,6 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bot `--send-telegram` integration tests with a live bot token once one is
   provided (keyless mocks cover the handlers today).
 
+### Fixed
+
+- Subscription token filters now apply consistently during scanning and alert
+  delivery; re-subscribing to an address updates its existing token filter.
+
 ## [0.1.0] — 2026-08-23
 
 Initial public release.

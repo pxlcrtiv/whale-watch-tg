@@ -29,12 +29,22 @@ def test_subscribe_unsubscribe_roundtrip(storage):
     assert len(storage.list_subscriptions(1)) == 1
 
 
-def test_watched_addresses_and_chat_routing(storage):
+def test_watch_plan_contains_addresses_and_routes_chats(storage):
     storage.add_subscription(7, ADDR_A)
     storage.add_subscription(9, ADDR_A)
     storage.add_subscription(7, "0x" + "3" * 40)
-    assert storage.all_watched_addresses() == {ADDR_A, "0x" + "3" * 40}
-    assert sorted(storage.chats_for_address(ADDR_A)) == [7, 9]
+    plan = storage.watch_plan()
+    assert {rule.address for rule in plan.rules} == {ADDR_A, "0x" + "3" * 40}
+    assert plan.chats_for(_t(100)) == frozenset({7, 9})
+
+
+def test_resubscribe_updates_token_filter(storage):
+    assert storage.add_subscription(1, ADDR_A, "USDT") is True
+    assert storage.add_subscription(1, ADDR_A, "USDT") is False
+    assert storage.add_subscription(1, ADDR_A, "usdc") is False
+    subscription = storage.list_subscriptions(1)[0]
+    assert subscription["token"] == "USDC"
+    assert storage.watch_plan().rules[0].token == "USDC"
 
 
 def test_event_dedupe_on_tx_log_pair(storage):
@@ -67,4 +77,4 @@ def test_alert_seen_tracking(storage):
 def test_case_insensitive_addresses(storage):
     storage.add_subscription(1, ADDR_A.upper())
     assert storage.list_subscriptions(1)[0]["address"] == ADDR_A
-    assert storage.all_watched_addresses() == {ADDR_A}
+    assert storage.watch_plan().rules[0].address == ADDR_A
